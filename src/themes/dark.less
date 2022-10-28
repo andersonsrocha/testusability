@@ -1,0 +1,48 @@
+@import "~antd/lib/style/color/colorPalette.less";
+@import "~antd/dist/antd.variable.less";
+@import "~antd/lib/style/themes/dark.less";
+
+// -------- HTML ----------
+@theme: dark;
+
+// -------- Colors --------
+@blue-base: #4b9188;
+@primary-color: #4b9188;
+@secondary-color: #242525;
+@secondary-1: color(~`colorPalette("@{secondary-color}", 1) `);
+@secondary-2: color(~`colorPalette("@{secondary-color}", 2) `);
+@secondary-3: color(~`colorPalette("@{secondary-color}", 3) `);
+@secondary-4: color(~`colorPalette("@{secondary-color}", 4) `);
+@secondary-5: color(~`colorPalette("@{secondary-color}", 5) `);
+@secondary-6: @secondary-color;
+@secondary-7: color(~`colorPalette("@{secondary-color}", 7) `);
+@scrollbar-color: fade(@white, 20%);
+
+// -------- Background --------
+@custom-bg: #1f1f1f;
+@component-background: @secondary-color;
+@drawer-bg: @component-background;
+
+// -------- Layout --------
+// Layout theme
+@popover-background: @component-background;
+@layout-body-background: #2a2c2c;
+@layout-header-background: @custom-bg;
+@layout-trigger-background: @component-background;
+@layout-sider-background: @layout-header-background;
+@layout-header-padding: 0 24px;
+// light
+@layout-sider-background-light: @component-background;
+@layout-trigger-background-light: @component-background;
+
+// -------- Menus --------
+@menu-item-padding-horizontal: 10px;
+@menu-dark-item-active-bg: transparent;
+@menu-dark-bg: @custom-bg;
+@menu-popup-bg: @custom-bg;
+
+// -------- Tables --------
+@table-header-bg: @secondary-5;
+
+// -------- Fonts --------
+@font-family: "Roboto", "Helvetica", "Arial", sans-serif;
