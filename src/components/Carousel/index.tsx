@@ -1,15 +1,7 @@
-import { Carousel as AntCarousel, CarouselProps as AntCarouselProps } from "antd";
+import { Carousel as AntCarousel, CarouselProps } from "antd";
 import { LeftOutlined, RightOutlined, SaveOutlined } from "@ant-design/icons";
 import { CustomArrowProps } from "@ant-design/react-slick/types";
 import styled from "@emotion/styled";
-
-export interface CarouselProps extends AntCarouselProps {
-  submit?: () => void;
-}
-
-export interface NextArrowProps extends CustomArrowProps {
-  submit?: () => void;
-}
 
 /**
  * Estiliza e cria um componente que será o botão de
@@ -65,16 +57,8 @@ export function PrevArrow(props: CustomArrowProps) {
  * @param {CustomArrowProps} props propriedades
  * @returns componente de próximo
  */
-export function NextArrow(props: NextArrowProps) {
-  const { onClick, submit, currentSlide, slideCount } = props;
-
-  if (currentSlide && slideCount && currentSlide === slideCount - 1) {
-    return (
-      <ArrowStyled className="next" onClick={submit}>
-        <SaveOutlined />
-      </ArrowStyled>
-    );
-  }
+export function NextArrow(props: CustomArrowProps) {
+  const { onClick } = props;
 
   return (
     <ArrowStyled className="next" onClick={onClick}>
@@ -89,12 +73,6 @@ export function NextArrow(props: NextArrowProps) {
  * @param {CarouselProps} props propriedades
  * @returns componente de carrosel
  */
-export function Carousel({ submit, ...restProps }: CarouselProps) {
-  return (
-    <AntCarousel
-      {...restProps}
-      nextArrow={<NextArrow submit={submit} />}
-      prevArrow={<PrevArrow />}
-    />
-  );
+export function Carousel(props: CarouselProps) {
+  return <AntCarousel {...props} nextArrow={<NextArrow />} prevArrow={<PrevArrow />} />;
 }

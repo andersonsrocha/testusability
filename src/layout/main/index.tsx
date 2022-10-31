@@ -5,8 +5,9 @@ import {
   MoreOutlined,
   PlusOutlined,
   QuestionCircleOutlined,
+  SaveOutlined,
 } from "@ant-design/icons";
-import { FcElectronics, FcLinux, FcPieChart, FcPlus, FcReadingEbook } from "react-icons/fc";
+import { FcElectronics, FcLinux, FcOk, FcPieChart, FcPlus, FcReadingEbook } from "react-icons/fc";
 import { Carousel, Report } from "@components";
 import { generateUUID } from "@utils";
 import {
@@ -290,7 +291,6 @@ export function Main() {
                               slidesToShow={1}
                               slidesToScroll={1}
                               initialSlide={0}
-                              submit={form.submit}
                             >
                               {fields.map(({ key, name, ...restField }) => (
                                 <div key={key}>
@@ -370,35 +370,16 @@ export function Main() {
                       </Col>
                     </Row>
 
-                    {/* <Row justify="space-between">
-                      <Col>
-                        <Button
-                          title={t("previous")}
-                          disabled={step === 0}
-                          icon={<ArrowLeftOutlined />}
-                          shape="circle"
-                          onClick={() => setStep((step) => step - 1)}
-                        />
+                    <Row justify="space-between" gutter={16}>
+                      <Col span={12}>
+                        <Button block>{t("cancel")}</Button>
                       </Col>
-
-                      <Col hidden={step === 10}>
-                        <Button
-                          title={t("next")}
-                          icon={<ArrowRightOutlined />}
-                          shape="circle"
-                          htmlType="submit"
-                        />
+                      <Col span={12}>
+                        <Button block type="primary" icon={<SaveOutlined />} htmlType="submit">
+                          {t("save")}
+                        </Button>
                       </Col>
-
-                      <Col hidden={step !== 10}>
-                        <Button
-                          title={t("save")}
-                          shape="circle"
-                          icon={<SaveOutlined />}
-                          htmlType="submit"
-                        />
-                      </Col>
-                    </Row> */}
+                    </Row>
                   </Form>
                 </Col>
               </Row>
