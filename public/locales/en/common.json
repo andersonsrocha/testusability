@@ -19,6 +19,7 @@
   "concluded_description": "Maximum limit of 8 sites reached.",
   "example": "Example",
   "save": "Save",
+  "back": "Back",
   "law1": {
     "name": "System state visibility",
     "short": "System state visibility",

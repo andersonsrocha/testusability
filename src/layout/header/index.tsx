@@ -46,11 +46,9 @@ export function Header() {
 
   return (
     <AntHeader style={{ width: "100%", position: "fixed", right: 0, zIndex: 100 }}>
-      <Row justify="space-between" style={{ height: "100%" }}>
-        <Col xs={0} md={12} flex="none" style={{ height: "100%" }}>
-          <Button type="link" href="/">
-            {/* <img height={60} src={logo} alt="logo" /> */}
-            {/* <img src={logo} alt="logo" /> */}
+      <Row justify="space-between" align="middle" style={{ height: "100%" }}>
+        <Col>
+          <a href="/">
             <div
               style={{
                 backgroundColor: "#ffffff",
@@ -60,7 +58,7 @@ export function Header() {
                 height: 50,
               }}
             />
-          </Button>
+          </a>
         </Col>
 
         <Col md={12} flex="none">

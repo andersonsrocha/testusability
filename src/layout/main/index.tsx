@@ -1,11 +1,14 @@
-import { Fragment, useCallback, useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import {
   ArrowLeftOutlined,
-  ArrowRightOutlined,
   DeleteOutlined,
+  MoreOutlined,
+  PlusOutlined,
   QuestionCircleOutlined,
-  SaveOutlined,
 } from "@ant-design/icons";
+import { FcElectronics, FcLinux, FcPieChart, FcPlus, FcReadingEbook } from "react-icons/fc";
+import { Carousel, Report } from "@components";
+import { generateUUID } from "@utils";
 import {
   Avatar,
   Button,
@@ -13,27 +16,27 @@ import {
   Col,
   Divider,
   Drawer,
+  Dropdown,
   Form,
   Image,
   Input,
   Layout,
   List,
-  Modal,
+  Menu,
   Radio,
-  Result,
   Row,
   Space,
   Tag,
   Tooltip,
   Typography,
 } from "antd";
-import { Report } from "@components";
-import { generateUUID } from "@utils";
 import { useTranslation } from "react-i18next";
+import useAntMediaQuery from "use-media-antd-query";
 
 import { Website } from "@types";
 
 import Exemplo1 from "@assets/laws/law_1.gif";
+import Exemplo10 from "@assets/laws/law_10.png";
 import Exemplo2 from "@assets/laws/law_2.gif";
 import Exemplo3 from "@assets/laws/law_3.png";
 import Exemplo4 from "@assets/laws/law_4.png";
@@ -42,21 +45,24 @@ import Exemplo6 from "@assets/laws/law_6.png";
 import Exemplo7 from "@assets/laws/law_7.png";
 import Exemplo8 from "@assets/laws/law_8.png";
 import Exemplo9 from "@assets/laws/law_9.png";
-import Exemplo10 from "@assets/laws/law_10.png";
 
 const { Content } = Layout;
 
 export function Main() {
   const { t } = useTranslation();
+  const colSize = useAntMediaQuery();
+  const sm = ["xs", "sm"].includes(colSize);
 
   const [form] = Form.useForm<Website>();
-  const [step, setStep] = useState(0);
+  const [isAddOpen, setIsAddOpen] = useState(false);
   const [sites, setSites] = useState<Array<Website>>([]);
 
   const onSubmit = useCallback(
     (item: Website) => {
-      setStep(0);
+      if (!item.id) item.id = generateUUID();
+
       setSites((sites) => sites.filter((x) => x.id !== item.id).concat(item));
+      setIsAddOpen(false);
       form.resetFields();
     },
     [form]
@@ -64,6 +70,7 @@ export function Main() {
 
   const onModify = useCallback(
     (item: Website) => {
+      setIsAddOpen(true);
       form.setFieldsValue(item);
     },
     [form]
@@ -77,43 +84,43 @@ export function Main() {
     () => [
       {
         exemplo: Exemplo1,
-        note: 0,
+        note: 2,
       },
       {
         exemplo: Exemplo2,
-        note: 0,
+        note: 2,
       },
       {
         exemplo: Exemplo3,
-        note: 0,
+        note: 2,
       },
       {
         exemplo: Exemplo4,
-        note: 0,
+        note: 2,
       },
       {
         exemplo: Exemplo5,
-        note: 0,
+        note: 2,
       },
       {
         exemplo: Exemplo6,
-        note: 0,
+        note: 2,
       },
       {
         exemplo: Exemplo7,
-        note: 0,
+        note: 2,
       },
       {
         exemplo: Exemplo8,
-        note: 0,
+        note: 2,
       },
       {
         exemplo: Exemplo9,
-        note: 0,
+        note: 2,
       },
       {
         exemplo: Exemplo10,
-        note: 0,
+        note: 2,
       },
     ],
     []
@@ -129,202 +136,273 @@ export function Main() {
     )
     .flat();
 
+  const extra = (
+    <Dropdown
+      overlay={
+        <Menu
+          items={[
+            {
+              key: "add",
+              label: t("add"),
+              icon: <FcPlus size={20} />,
+              onClick: () => setIsAddOpen(true),
+            },
+          ]}
+        />
+      }
+    >
+      <MoreOutlined />
+    </Dropdown>
+  );
+
   return (
     <Content>
       <div style={{ padding: 24 }}>
-        <Card title={t("test")} bodyStyle={{ minHeight: 600 }}>
+        <Card
+          size={sm ? "small" : "default"}
+          title={
+            <Row align="middle" gutter={4}>
+              <Col style={{ display: "flex", alignItems: "center" }}>
+                <FcLinux size={24} />
+              </Col>
+              <Col>{t("test")}</Col>
+            </Row>
+          }
+        >
           <Row gutter={[24, 24]}>
-            <Col span={8}>
-              <Card title={t("add")} hoverable>
-                {sites.length === 8 && (
-                  <Result
-                    status="success"
-                    title={`${t("concluded")}!`}
-                    subTitle={t("concluded_description")}
-                  />
-                )}
+            <Col xs={24} md={8}>
+              <Card
+                hoverable
+                type="inner"
+                extra={extra}
+                size={sm ? "small" : "default"}
+                title={
+                  <Row align="middle" gutter={4}>
+                    <Col style={{ display: "flex", alignItems: "center" }}>
+                      <FcElectronics size={24} />
+                    </Col>
+                    <Col>{t("website", { count: 2 })}</Col>
+                  </Row>
+                }
+              >
+                <List
+                  itemLayout="horizontal"
+                  dataSource={sites}
+                  renderItem={(item) => (
+                    <List.Item
+                      extra={
+                        <Button
+                          danger
+                          type="text"
+                          shape="circle"
+                          icon={<DeleteOutlined />}
+                          onClick={() => onDrop(item.id)}
+                        />
+                      }
+                    >
+                      <List.Item.Meta
+                        avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
+                        description={<Tag color="green">Concluído</Tag>}
+                        title={
+                          <Typography.Link onClick={() => onModify(item)}>
+                            {item.link}
+                          </Typography.Link>
+                        }
+                      />
+                    </List.Item>
+                  )}
+                ></List>
+              </Card>
+            </Col>
 
-                {sites.length < 8 && (
+            <Col xs={24} md={16}>
+              {data.length > 0 && (
+                <Card
+                  hoverable
+                  type="inner"
+                  title={
+                    <Row align="middle" gutter={4}>
+                      <Col style={{ display: "flex", alignItems: "center" }}>
+                        <FcPieChart size={24} />
+                      </Col>
+                      <Col>{t("result")}</Col>
+                    </Row>
+                  }
+                  size={sm ? "small" : "default"}
+                >
+                  <Report data={data} />
+                </Card>
+              )}
+            </Col>
+
+            {/* add */}
+            <Drawer
+              open={isAddOpen}
+              title={t("add")}
+              closable={false}
+              height={550}
+              placement={sm ? "bottom" : "right"}
+              width="50vw"
+              onClose={() => setIsAddOpen(false)}
+              extra={
+                <Button icon={<ArrowLeftOutlined />} onClick={() => setIsAddOpen(false)}>
+                  {t("back")}
+                </Button>
+              }
+            >
+              <Row>
+                <Col xs={24} md={{ span: 20, offset: 2 }}>
                   <Form
                     form={form}
+                    scrollToFirstError
                     layout="vertical"
                     autoComplete="off"
-                    initialValues={{ id: generateUUID(), laws }}
-                    onFinish={(values) => {
-                      if (step < 10) {
-                        setStep((step) => step + 1);
-                      } else {
-                        onSubmit(values);
-                      }
-                    }}
+                    initialValues={{ laws }}
+                    onFinish={onSubmit}
                   >
-                    <Row gutter={16}>
-                      <Col>
-                        <Form.Item name="id" hidden>
+                    <Row>
+                      <Col span={24}>
+                        <Form.Item hidden name="id">
                           <Input />
                         </Form.Item>
                       </Col>
 
-                      <Col hidden={step !== 0} span={24}>
+                      <Col span={24}>
                         <Form.Item label={t("link")} name="link" rules={[{ required: true }]}>
                           <Input addonBefore="http://" placeholder="www.google.com" />
                         </Form.Item>
                       </Col>
 
-                      {step > 0 && (
-                        <Col span={24}>
-                          <Row justify="space-between">
-                            <Col>
-                              <Avatar size="small">{step}</Avatar>
-                            </Col>
-
-                            <Col>
-                              <Typography.Paragraph strong>
-                                {t(`law${step}.name`)}
-                              </Typography.Paragraph>
-                            </Col>
-
-                            <Col>
-                              <Tooltip title={t(`law${step}.description`)}>
-                                <QuestionCircleOutlined />
-                              </Tooltip>
-                            </Col>
-                          </Row>
-                        </Col>
-                      )}
-
                       <Col span={24}>
                         <Divider />
                       </Col>
+                    </Row>
 
+                    <Row>
                       <Col span={24}>
                         <Form.List name="laws">
                           {(fields) => (
-                            <Fragment>
+                            <Carousel
+                              arrows
+                              dots={false}
+                              speed={800}
+                              infinite={true}
+                              slidesToShow={1}
+                              slidesToScroll={1}
+                              initialSlide={0}
+                              submit={form.submit}
+                            >
                               {fields.map(({ key, name, ...restField }) => (
-                                <Fragment key={key}>
-                                  <Form.Item
-                                    shouldUpdate
-                                    {...restField}
-                                    label={t("example")}
-                                    hidden={step - 1 !== name}
-                                    noStyle={step - 1 !== name}
+                                <div key={key}>
+                                  <Row
+                                    justify="space-between"
+                                    style={{ marginLeft: 8, marginRight: 8 }}
+                                    gutter={4}
                                   >
-                                    {({ getFieldValue }) => (
-                                      <Image src={getFieldValue(["laws", name, "exemplo"])} />
-                                    )}
-                                  </Form.Item>
+                                    <Col span={2}>
+                                      <Tag
+                                        color="blue"
+                                        style={{ width: "100%", textAlign: "center" }}
+                                      >
+                                        <Typography.Text strong>{name + 1}</Typography.Text>
+                                      </Tag>
+                                    </Col>
 
-                                  <Form.Item
-                                    {...restField}
-                                    label={t("note")}
-                                    name={[name, "note"]}
-                                    rules={[{ required: true }]}
-                                    hidden={step - 1 !== name}
-                                    noStyle={step - 1 !== name}
-                                  >
-                                    <Radio.Group>
-                                      <Space direction="vertical">
-                                        <Radio value={0}>{t("terrible")}</Radio>
-                                        <Radio value={2}>{t("too_bad")}</Radio>
-                                        <Radio value={4}>{t("bad")}</Radio>
-                                        <Radio value={6}>{t("good")}</Radio>
-                                        <Radio value={8}>{t("very_good")}</Radio>
-                                        <Radio value={10}>{t("great")}</Radio>
-                                      </Space>
-                                    </Radio.Group>
-                                  </Form.Item>
-                                </Fragment>
+                                    <Col span={20} style={{ textAlign: "center" }}>
+                                      <Tag color="blue" style={{ width: "100%" }}>
+                                        <Typography.Text
+                                          strong
+                                          ellipsis={{ tooltip: t(`law${name + 1}.name`) }}
+                                        >
+                                          {t(`law${name + 1}.name`)}
+                                        </Typography.Text>
+                                      </Tag>
+                                    </Col>
+
+                                    <Col span={2}>
+                                      <Tooltip title={t(`law${name + 1}.description`)}>
+                                        <Tag color="blue">
+                                          <QuestionCircleOutlined />
+                                        </Tag>
+                                      </Tooltip>
+                                    </Col>
+
+                                    <Col span={24}>
+                                      <Divider />
+                                    </Col>
+
+                                    <Col span={24}>
+                                      <Form.Item shouldUpdate {...restField} label={t("example")}>
+                                        {({ getFieldValue }) => (
+                                          <Image src={getFieldValue(["laws", name, "exemplo"])} />
+                                        )}
+                                      </Form.Item>
+                                    </Col>
+
+                                    <Col span={24}>
+                                      <Divider />
+                                    </Col>
+
+                                    <Col span={24}>
+                                      <Form.Item
+                                        {...restField}
+                                        label={t("note")}
+                                        name={[name, "note"]}
+                                        rules={[{ required: true }]}
+                                      >
+                                        <Radio.Group>
+                                          <Space direction={sm ? "vertical" : "horizontal"}>
+                                            <Radio value={2}>{t("terrible")}</Radio>
+                                            <Radio value={4}>{t("bad")}</Radio>
+                                            <Radio value={6}>{t("good")}</Radio>
+                                            <Radio value={8}>{t("very_good")}</Radio>
+                                            <Radio value={10}>{t("great")}</Radio>
+                                          </Space>
+                                        </Radio.Group>
+                                      </Form.Item>
+                                    </Col>
+                                  </Row>
+                                </div>
                               ))}
-                            </Fragment>
+                            </Carousel>
                           )}
                         </Form.List>
                       </Col>
-
-                      <Col hidden={step < 1} span={24}>
-                        <Divider />
-                      </Col>
-
-                      <Col span={24}>
-                        <Row justify="space-between">
-                          <Col>
-                            <Button
-                              title={t("previous")}
-                              disabled={step === 0}
-                              icon={<ArrowLeftOutlined />}
-                              shape="circle"
-                              onClick={() => setStep((step) => step - 1)}
-                            />
-                          </Col>
-
-                          <Col hidden={step === 10}>
-                            <Button
-                              title={t("next")}
-                              icon={<ArrowRightOutlined />}
-                              shape="circle"
-                              htmlType="submit"
-                            />
-                          </Col>
-
-                          <Col hidden={step !== 10}>
-                            <Button
-                              title={t("save")}
-                              shape="circle"
-                              icon={<SaveOutlined />}
-                              htmlType="submit"
-                            />
-                          </Col>
-                        </Row>
-                      </Col>
                     </Row>
+
+                    {/* <Row justify="space-between">
+                      <Col>
+                        <Button
+                          title={t("previous")}
+                          disabled={step === 0}
+                          icon={<ArrowLeftOutlined />}
+                          shape="circle"
+                          onClick={() => setStep((step) => step - 1)}
+                        />
+                      </Col>
+
+                      <Col hidden={step === 10}>
+                        <Button
+                          title={t("next")}
+                          icon={<ArrowRightOutlined />}
+                          shape="circle"
+                          htmlType="submit"
+                        />
+                      </Col>
+
+                      <Col hidden={step !== 10}>
+                        <Button
+                          title={t("save")}
+                          shape="circle"
+                          icon={<SaveOutlined />}
+                          htmlType="submit"
+                        />
+                      </Col>
+                    </Row> */}
                   </Form>
-                )}
-              </Card>
-            </Col>
-
-            <Col span={16}>
-              <Row gutter={[24, 24]}>
-                <Col span={24}>
-                  <Card title={t("website", { count: 2 })} hoverable>
-                    <List
-                      itemLayout="horizontal"
-                      dataSource={sites}
-                      renderItem={(item) => (
-                        <List.Item
-                          extra={
-                            <Button
-                              danger
-                              type="text"
-                              shape="circle"
-                              icon={<DeleteOutlined />}
-                              onClick={() => onDrop(item.id)}
-                            />
-                          }
-                        >
-                          <List.Item.Meta
-                            avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                            description={<Tag color="green">Concluído</Tag>}
-                            title={
-                              <Typography.Link onClick={() => onModify(item)}>
-                                {item.link}
-                              </Typography.Link>
-                            }
-                          />
-                        </List.Item>
-                      )}
-                    ></List>
-                  </Card>
-                </Col>
-
-                <Col span={24}>
-                  {data.length > 0 && (
-                    <Card title={t("result")} hoverable>
-                      <Report data={data} />
-                    </Card>
-                  )}
                 </Col>
               </Row>
-            </Col>
+            </Drawer>
           </Row>
         </Card>
       </div>
