@@ -33,6 +33,17 @@ import { useTranslation } from "react-i18next";
 
 import { Website } from "@types";
 
+import Exemplo1 from "@assets/laws/law_1.gif";
+import Exemplo2 from "@assets/laws/law_2.gif";
+import Exemplo3 from "@assets/laws/law_3.png";
+import Exemplo4 from "@assets/laws/law_4.png";
+import Exemplo5 from "@assets/laws/law_5.png";
+import Exemplo6 from "@assets/laws/law_6.png";
+import Exemplo7 from "@assets/laws/law_7.png";
+import Exemplo8 from "@assets/laws/law_8.png";
+import Exemplo9 from "@assets/laws/law_9.png";
+import Exemplo10 from "@assets/laws/law_10.png";
+
 const { Content } = Layout;
 
 export function Main() {
@@ -65,43 +76,43 @@ export function Main() {
   const laws = useMemo(
     () => [
       {
-        exemplo: "/src/assets/laws/law_1.gif",
+        exemplo: Exemplo1,
         note: 0,
       },
       {
-        exemplo: "/src/assets/laws/law_2.gif",
+        exemplo: Exemplo2,
         note: 0,
       },
       {
-        exemplo: "/src/assets/laws/law_3.png",
+        exemplo: Exemplo3,
         note: 0,
       },
       {
-        exemplo: "/src/assets/laws/law_4.png",
+        exemplo: Exemplo4,
         note: 0,
       },
       {
-        exemplo: "/src/assets/laws/law_5.png",
+        exemplo: Exemplo5,
         note: 0,
       },
       {
-        exemplo: "/src/assets/laws/law_6.png",
+        exemplo: Exemplo6,
         note: 0,
       },
       {
-        exemplo: "/src/assets/laws/law_7.png",
+        exemplo: Exemplo7,
         note: 0,
       },
       {
-        exemplo: "/src/assets/laws/law_8.png",
+        exemplo: Exemplo8,
         note: 0,
       },
       {
-        exemplo: "/src/assets/laws/law_9.png",
+        exemplo: Exemplo9,
         note: 0,
       },
       {
-        exemplo: "/src/assets/laws/law_10.png",
+        exemplo: Exemplo10,
         note: 0,
       },
     ],
