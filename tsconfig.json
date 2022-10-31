@@ -22,7 +22,8 @@
       "@config": ["src/config/index"],
       "@assets": ["src/assets"],
       "@types": ["src/types/index"],
-      "@constants": ["src/constants/index"]
+      "@constants": ["src/constants/index"],
+      "@utils": ["src/utils/index"]
     }
   },
   "include": ["src"],

@@ -1,2 +1,72 @@
 {
+  "test": "Test",
+  "add": "Add",
+  "website": "Website",
+  "website_other": "Websites",
+  "result": "Result",
+  "link": "Link",
+  "note": "Note",
+  "terrible": "Terrible",
+  "too_bad": "Very bad",
+  "bad": "Bad",
+  "good": "Good",
+  "very_good": "Very good",
+  "great": "Excellent",
+  "previous": "Previous",
+  "next": "Next",
+  "concluded": "Concluded",
+  "delete": "Delete",
+  "concluded_description": "Maximum limit of 8 sites reached.",
+  "example": "Example",
+  "save": "Save",
+  "law1": {
+    "name": "System state visibility",
+    "short": "System state visibility",
+    "description": "The system should always keep users informed of what is happening, through appropriate feedback within a reasonable timeframe. This feedback is normally associated with action points and can be provided using a color change, loader (loading), time remaining charts, etc."
+  },
+  "law2": {
+    "name": "Equivalence between the system and the real world",
+    "short": "Equivalence between the system and the real world",
+    "description": "The system should speak the users' language, with words, phrases, and concepts familiar to the user, rather than system-oriented terms. Follow real-world conventions, making information appear in a natural order and logic."
+  },
+  "law3": {
+    "name": "User freedom and control",
+    "short": "User freedom and control",
+    "description": "Users often choose system functions by mistake and will need a clearly marked “emergency exit” to leave the unwanted state without having to go through extensive dialog. Undo and redo support."
+  },
+  "law4": {
+    "name": "Consistency and Patterns",
+    "short": "Consistency and Patterns",
+    "description": "Even better than good error messages is a thoughtful design that prevents a problem from occurring. Eliminate error-prone conditions or verify them and present users with a confirmation option before committing to action ."
+  },
+  "law5": {
+    "name": "Error Prevention",
+    "short": "Error Prevention",
+    "description": "Users should not wonder if different words, situations or actions mean the same thing."
+  },
+  "law6": {
+    "name": "Recognise rather than remember",
+    "short": "Recognise rather than remember",
+    "description": "Minimize user memory load by making objects, actions and options visible. User should not have to remember information from one part of the dialog to another. System usage instructions should be visible or easily recoverable where appropriate."
+  },
+  "law7": {
+    "name": "Flexibility and efficiency of use",
+    "short": "Flexibility and efficiency of use",
+    "description": "The interface must meet both the needs of lay users and experienced users, laymen need to have very detailed information to be able to perform a task, but as they get to know the interface, they need to be able to interact faster. "
+  },
+  "law8": {
+    "name": "Aesthetics and minimalist design",
+    "short": "Aesthetics and minimalist design",
+    "description": "The greater the amount of information, the longer it will take the user to analyze it and be able to make a decision, thus increasing the chances of him abandoning the application/site because he finds it too confusing."
+  },
+  "law9": {
+    "name": "Help users to recognize, diagnose and recover wrong actions",
+    "short": "Help user with wrong actions",
+    "description": "If something goes wrong, it is important to show the user what the error was and how to recover from it, for that, the error messages must be clear and objective, in simple language and close to the action that caused the error ."
+  },
+  "law10": {
+    "name": "Help and Documentation",
+    "short": "Help and Documentation",
+    "description": "We never know when a user will need assistance, although the documentation and help areas are the least accessed, they must be there, especially in interfaces that have many possibilities, as they can help the user to solve a problem alone."
+  }
 }

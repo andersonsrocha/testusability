@@ -1,2 +1,72 @@
 {
+  "test": "Testar",
+  "add": "Adicionar",
+  "website": "Site",
+  "website_other": "Sites",
+  "result": "Resultado",
+  "link": "Link",
+  "note": "Nota",
+  "terrible": "Péssimo",
+  "too_bad": "Muito ruim",
+  "bad": "Ruim",
+  "good": "Bom",
+  "very_good": "Muito bom",
+  "great": "Excelente",
+  "previous": "Anterior",
+  "next": "Próximo",
+  "concluded": "Concluído",
+  "delete": "Excluir",
+  "concluded_description": "Limite máximo de 8 sites alcançado.",
+  "example": "Exemplo",
+  "save": "Salvar",
+  "law1": {
+    "name": "Visibilidade do estado do sistema",
+    "short": "Visibilidade do estado do sistema",
+    "description": "O sistema deve sempre manter os usuários informados sobre o que está acontecendo, por meio de feedback apropriado dentro de um prazo razoável. Este feedback é normalmente associado a pontos de ação e pode ser fornecido usando uma mudança de cor, carregador (loading), gráficos de tempo restante etc."
+  },
+  "law2": {
+    "name": "Equivalência entre o sistema e o mundo real",
+    "short": "Equivalência entre o sistema e o mundo real",
+    "description": "O sistema deve falar a língua dos usuários, com palavras, frases e conceitos familiares ao usuário, ao invés de termos orientados ao sistema. Siga as convenções do mundo real, fazendo com que as informações apareçam em uma ordem natural e lógica."
+  },
+  "law3": {
+    "name": "Liberdade e controle do usuário",
+    "short": "Liberdade e controle do usuário",
+    "description": "Os usuários frequentemente escolhem as funções do sistema por engano e precisarão de uma “saída de emergência” claramente marcada para deixar o estado indesejado sem ter que passar por um diálogo extenso. Suporte para desfazer e refazer."
+  },
+  "law4": {
+    "name": "Consistência e padrões",
+    "short": "Consistência e padrões",
+    "description": "Ainda melhor do que boas mensagens de erro é um design cuidadoso que evita a ocorrência de um problema. Elimine as condições sujeitas a erros ou verifique-as e apresente aos usuários uma opção de confirmação antes de se comprometerem com a ação."
+  },
+  "law5": {
+    "name": "Prevenção de erros",
+    "short": "Prevenção de erros",
+    "description": "Os usuários não devem se perguntar se palavras, situações ou ações diferentes significam a mesma coisa."
+  },
+  "law6": {
+    "name": "Reconhecer ao invés de relembrar",
+    "short": "Reconhecer ao invés de relembrar",
+    "description": "Minimize a carga de memória do usuário, tornando objetos, ações e opções visíveis. O usuário não deve ter que se lembrar de informações de uma parte do diálogo para outra. As instruções de uso do sistema devem ser visíveis ou facilmente recuperáveis quando apropriado."
+  },
+  "law7": {
+    "name": "Flexibilidade e eficiência de uso",
+    "short": "Flexibilidade e eficiência de uso",
+    "description": "A interface deve atender tanto as necessidades dos usuários leigos quanto a dos experientes, os leigos precisam ter as informações bem detalhadas para conseguirem realizar uma tarefa, mas a medida que vão conhecendo a interface precisam conseguir interagir de forma mais rápida."
+  },
+  "law8": {
+    "name": "Estética e design minimalista",
+    "short": "Estética e design minimalista",
+    "description": "Quanto maior a quantidade de informações, mais tempo o usuário vai levar para analisá-las e poder tomar uma decisão, aumentando assim as chances dele abandonar a aplicação/site por achar confuso demais."
+  },
+  "law9": {
+    "name": "Auxiliar usuários a reconhecer, diagnosticar e recuperar ações erradas",
+    "short": "Auxiliar usuário com ações erradas",
+    "description": "Caso dê algo de errado, é importante mostrar ao usuário qual foi o erro e como se recuperar dele, para isso, as mensagens de erro devem ser claras e objetivas, em linguagem simples e próximas da ação que causou o erro."
+  },
+  "law10": {
+    "name": "Ajuda e documentação",
+    "short": "Ajuda e documentação",
+    "description": "Nunca sabemos quando um usuário vai precisar de um auxílio, embora as áreas de documentação e ajuda sejam as menos acessadas, elas devem estar lá, principalmente em interfaces que possuem muitas possibilidades, pois podem ajudar o usuário a resolver um problema sozinho."
+  }
 }

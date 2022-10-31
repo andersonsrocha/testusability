@@ -6,7 +6,8 @@ import { DarkModeOutlined, LightModeOutlined, TranslateOutlined } from "@icons";
 import { AppDispatch, selectTheme, setCurrentTheme, selectLang, setCurrentLang } from "@config";
 import { locales } from "@constants";
 
-import logo from "@assets/logo.png";
+import logo from "@assets/logo.svg";
+// import logo from "@assets/logo.png";
 
 import { LanguageCurrentDisplay } from "@types";
 import { MenuInfo } from "rc-menu/lib/interface";
@@ -48,7 +49,17 @@ export function Header() {
       <Row justify="space-between" style={{ height: "100%" }}>
         <Col xs={0} md={12} flex="none" style={{ height: "100%" }}>
           <Button type="link" href="/">
-            <img height={50} src={logo} alt="logo" />
+            {/* <img height={60} src={logo} alt="logo" /> */}
+            {/* <img src={logo} alt="logo" /> */}
+            <div
+              style={{
+                backgroundColor: "#ffffff",
+                WebkitMask: `url(${logo}) no-repeat center`,
+                WebkitMaskSize: "contain",
+                width: 50,
+                height: 50,
+              }}
+            />
           </Button>
         </Col>
 
