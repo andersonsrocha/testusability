@@ -21,6 +21,8 @@
   "save": "Save",
   "back": "Back",
   "cancel": "Cancel",
+  "regular": "Regular",
+  "reset": "Reset",
   "law1": {
     "name": "System state visibility",
     "short": "System state visibility",

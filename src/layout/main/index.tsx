@@ -1,8 +1,11 @@
-import { useCallback, useMemo, useState } from "react";
+import { Fragment, useCallback, useMemo, useState } from "react";
 import {
   ArrowLeftOutlined,
+  ArrowRightOutlined,
   DeleteOutlined,
+  EditOutlined,
   MoreOutlined,
+  PlusOutlined,
   QuestionCircleOutlined,
   SaveOutlined,
 } from "@ant-design/icons";
@@ -26,6 +29,7 @@ import {
   Radio,
   Row,
   Space,
+  Steps,
   Tag,
   Tooltip,
   Typography,
@@ -54,6 +58,7 @@ export function Main() {
   const sm = ["xs", "sm"].includes(colSize);
 
   const [form] = Form.useForm<Website>();
+  const [step, setStep] = useState(0);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [sites, setSites] = useState<Array<Website>>([]);
 
@@ -61,12 +66,18 @@ export function Main() {
     (item: Website) => {
       if (!item.id) item.id = generateUUID();
 
+      setStep(0);
       setSites((sites) => sites.filter((x) => x.id !== item.id).concat(item));
       setIsAddOpen(false);
       form.resetFields();
     },
     [form]
   );
+
+  const onCreate = useCallback(() => {
+    setIsAddOpen(true);
+    form.resetFields();
+  }, [form]);
 
   const onModify = useCallback(
     (item: Website) => {
@@ -82,46 +93,16 @@ export function Main() {
 
   const laws = useMemo(
     () => [
-      {
-        exemplo: Exemplo1,
-        note: 2,
-      },
-      {
-        exemplo: Exemplo2,
-        note: 2,
-      },
-      {
-        exemplo: Exemplo3,
-        note: 2,
-      },
-      {
-        exemplo: Exemplo4,
-        note: 2,
-      },
-      {
-        exemplo: Exemplo5,
-        note: 2,
-      },
-      {
-        exemplo: Exemplo6,
-        note: 2,
-      },
-      {
-        exemplo: Exemplo7,
-        note: 2,
-      },
-      {
-        exemplo: Exemplo8,
-        note: 2,
-      },
-      {
-        exemplo: Exemplo9,
-        note: 2,
-      },
-      {
-        exemplo: Exemplo10,
-        note: 2,
-      },
+      { exemplo: Exemplo1, note: 5 },
+      { exemplo: Exemplo2, note: 5 },
+      { exemplo: Exemplo3, note: 5 },
+      { exemplo: Exemplo4, note: 5 },
+      { exemplo: Exemplo5, note: 5 },
+      { exemplo: Exemplo6, note: 5 },
+      { exemplo: Exemplo7, note: 5 },
+      { exemplo: Exemplo8, note: 5 },
+      { exemplo: Exemplo9, note: 5 },
+      { exemplo: Exemplo10, note: 5 },
     ],
     []
   );
@@ -135,25 +116,6 @@ export function Main() {
       }))
     )
     .flat();
-
-  const extra = (
-    <Dropdown
-      overlay={
-        <Menu
-          items={[
-            {
-              key: "add",
-              label: t("add"),
-              icon: <FcPlus size={20} />,
-              onClick: () => setIsAddOpen(true),
-            },
-          ]}
-        />
-      }
-    >
-      <MoreOutlined />
-    </Dropdown>
-  );
 
   return (
     <Content>
@@ -171,10 +133,13 @@ export function Main() {
         >
           <Row gutter={[24, 24]}>
             <Col xs={24} md={8}>
+              {/* list */}
               <Card
                 hoverable
                 type="inner"
-                extra={extra}
+                extra={
+                  <Button type="ghost" shape="circle" icon={<PlusOutlined />} onClick={onCreate} />
+                }
                 size={sm ? "small" : "default"}
                 title={
                   <Row align="middle" gutter={4}>
@@ -191,23 +156,33 @@ export function Main() {
                   renderItem={(item) => (
                     <List.Item
                       extra={
-                        <Button
-                          danger
-                          type="text"
-                          shape="circle"
-                          icon={<DeleteOutlined />}
-                          onClick={() => onDrop(item.id)}
-                        />
+                        <Row gutter={4}>
+                          <Col>
+                            <Button type="text" shape="circle" onClick={() => onModify(item)}>
+                              <Typography.Text type="warning">
+                                <EditOutlined />
+                              </Typography.Text>
+                            </Button>
+                          </Col>
+                          <Col>
+                            <Button
+                              danger
+                              type="text"
+                              shape="circle"
+                              onClick={() => onDrop(item.id)}
+                            >
+                              <Typography.Text type="danger">
+                                <DeleteOutlined />
+                              </Typography.Text>
+                            </Button>
+                          </Col>
+                        </Row>
                       }
                     >
                       <List.Item.Meta
                         avatar={<Avatar src="https://joeschmoe.io/api/v1/random" />}
-                        description={<Tag color="green">Concluído</Tag>}
-                        title={
-                          <Typography.Link onClick={() => onModify(item)}>
-                            {item.link}
-                          </Typography.Link>
-                        }
+                        description={<Tag color="green">{t("concluded")}</Tag>}
+                        title={<Typography.Link>{item.link}</Typography.Link>}
                       />
                     </List.Item>
                   )}
@@ -278,103 +253,112 @@ export function Main() {
                       </Col>
                     </Row>
 
-                    <Row>
+                    <Row justify="center" gutter={[24, 24]}>
                       <Col span={24}>
-                        <Form.List name="laws">
-                          {(fields) => (
-                            <Carousel
-                              arrows
-                              dots={false}
-                              speed={800}
-                              infinite={true}
-                              slidesToShow={1}
-                              slidesToScroll={1}
-                              initialSlide={0}
+                        <Steps
+                          size="small"
+                          current={step}
+                          onChange={setStep}
+                          percent={(100 * (step + 1)) / 10}
+                        >
+                          <Steps.Step />
+                          <Steps.Step />
+                          <Steps.Step />
+                          <Steps.Step />
+                          <Steps.Step />
+                          <Steps.Step />
+                          <Steps.Step />
+                          <Steps.Step />
+                          <Steps.Step />
+                          <Steps.Step />
+                        </Steps>
+                      </Col>
+
+                      <Col span={24}>
+                        <Row justify="center">
+                          <Col span={2} />
+
+                          <Col span={20} style={{ textAlign: "center" }}>
+                            <Typography.Text
+                              strong
+                              ellipsis={{ tooltip: t(`law${step + 1}.name`) }}
                             >
-                              {fields.map(({ key, name, ...restField }) => (
-                                <div key={key}>
-                                  <Row
-                                    justify="space-between"
-                                    style={{ marginLeft: 8, marginRight: 8 }}
-                                    gutter={4}
-                                  >
-                                    <Col span={2}>
-                                      <Tag
-                                        color="blue"
-                                        style={{ width: "100%", textAlign: "center" }}
-                                      >
-                                        <Typography.Text strong>{name + 1}</Typography.Text>
-                                      </Tag>
-                                    </Col>
+                              {t(`law${step + 1}.name`)}
+                            </Typography.Text>
+                          </Col>
 
-                                    <Col span={20} style={{ textAlign: "center" }}>
-                                      <Tag color="blue" style={{ width: "100%" }}>
-                                        <Typography.Text
-                                          strong
-                                          ellipsis={{ tooltip: t(`law${name + 1}.name`) }}
-                                        >
-                                          {t(`law${name + 1}.name`)}
-                                        </Typography.Text>
-                                      </Tag>
-                                    </Col>
+                          <Col span={2}>
+                            <Tooltip title={t(`law${step + 1}.description`)}>
+                              <QuestionCircleOutlined />
+                            </Tooltip>
+                          </Col>
 
-                                    <Col span={2}>
-                                      <Tooltip title={t(`law${name + 1}.description`)}>
-                                        <Tag color="blue">
-                                          <QuestionCircleOutlined />
-                                        </Tag>
-                                      </Tooltip>
-                                    </Col>
+                          <Col span={24}>
+                            <Form.Item shouldUpdate label={t("example")}>
+                              {({ getFieldValue }) => (
+                                <Image src={getFieldValue(["laws", step, "exemplo"])} />
+                              )}
+                            </Form.Item>
+                          </Col>
 
-                                    <Col span={24}>
-                                      <Divider />
-                                    </Col>
+                          <Col>
+                            <Form.List name="laws">
+                              {(fields) => (
+                                <Fragment>
+                                  {fields.map(({ key, name, ...restField }) => (
+                                    <Form.Item
+                                      {...restField}
+                                      label={t("note")}
+                                      name={[name, "note"]}
+                                      rules={[{ required: true }]}
+                                      hidden={step !== name}
+                                      noStyle={step !== name}
+                                    >
+                                      <Radio.Group>
+                                        <Space direction={sm ? "vertical" : "horizontal"}>
+                                          <Radio value={0}>{t("terrible")}</Radio>
+                                          <Radio value={3}>{t("bad")}</Radio>
+                                          <Radio value={5}>{t("regular")}</Radio>
+                                          <Radio value={7}>{t("good")}</Radio>
+                                          <Radio value={10}>{t("great")}</Radio>
+                                        </Space>
+                                      </Radio.Group>
+                                    </Form.Item>
+                                  ))}
+                                </Fragment>
+                              )}
+                            </Form.List>
+                          </Col>
 
-                                    <Col span={24}>
-                                      <Form.Item shouldUpdate {...restField} label={t("example")}>
-                                        {({ getFieldValue }) => (
-                                          <Image src={getFieldValue(["laws", name, "exemplo"])} />
-                                        )}
-                                      </Form.Item>
-                                    </Col>
-
-                                    <Col span={24}>
-                                      <Divider />
-                                    </Col>
-
-                                    <Col span={24}>
-                                      <Form.Item
-                                        {...restField}
-                                        label={t("note")}
-                                        name={[name, "note"]}
-                                        rules={[{ required: true }]}
-                                      >
-                                        <Radio.Group>
-                                          <Space direction={sm ? "vertical" : "horizontal"}>
-                                            <Radio value={2}>{t("terrible")}</Radio>
-                                            <Radio value={4}>{t("bad")}</Radio>
-                                            <Radio value={6}>{t("good")}</Radio>
-                                            <Radio value={8}>{t("very_good")}</Radio>
-                                            <Radio value={10}>{t("great")}</Radio>
-                                          </Space>
-                                        </Radio.Group>
-                                      </Form.Item>
-                                    </Col>
-                                  </Row>
-                                </div>
-                              ))}
-                            </Carousel>
-                          )}
-                        </Form.List>
+                          <Col span={24}>
+                            <Divider />
+                          </Col>
+                        </Row>
                       </Col>
                     </Row>
 
-                    <Row justify="space-between" gutter={16}>
-                      <Col span={12}>
-                        <Button block>{t("cancel")}</Button>
+                    <Row justify="space-between">
+                      <Col>
+                        <Button
+                          ghost
+                          type="primary"
+                          disabled={step === 0}
+                          onClick={() => setStep((step) => step - 1)}
+                        >
+                          <ArrowLeftOutlined />
+                          {t("previous")}
+                        </Button>
                       </Col>
-                      <Col span={12}>
-                        <Button block type="primary" icon={<SaveOutlined />} htmlType="submit">
+
+                      <Col hidden={step === 9}>
+                        <Button type="primary" onClick={() => setStep((step) => step + 1)}>
+                          {t("next")}
+                          <ArrowRightOutlined />
+                        </Button>
+                      </Col>
+
+                      <Col hidden={step !== 9}>
+                        <Button type="primary" icon={<SaveOutlined />} htmlType="submit">
                           {t("save")}
                         </Button>
                       </Col>
