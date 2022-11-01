@@ -1,17 +1,16 @@
 import { useCallback, useState } from "react";
-import { Row, Layout, Col, Button, Menu, Switch } from "antd";
+import { Row, Layout, Col, Menu, Switch } from "antd";
 import { useThemeSwitcher } from "react-css-theme-switcher";
 import { useDispatch, useSelector } from "react-redux";
 import { DarkModeOutlined, LightModeOutlined, TranslateOutlined } from "@icons";
 import { AppDispatch, selectTheme, setCurrentTheme, selectLang, setCurrentLang } from "@config";
+import { useTranslation } from "react-i18next";
 import { locales } from "@constants";
 
 import logo from "@assets/logo.svg";
-// import logo from "@assets/logo.png";
 
 import { LanguageCurrentDisplay } from "@types";
 import { MenuInfo } from "rc-menu/lib/interface";
-import { useTranslation } from "react-i18next";
 
 const { Header: AntHeader } = Layout;
 

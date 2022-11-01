@@ -3,11 +3,10 @@ import {
   ArrowLeftOutlined,
   DeleteOutlined,
   MoreOutlined,
-  PlusOutlined,
   QuestionCircleOutlined,
   SaveOutlined,
 } from "@ant-design/icons";
-import { FcElectronics, FcLinux, FcOk, FcPieChart, FcPlus, FcReadingEbook } from "react-icons/fc";
+import { FcElectronics, FcLinux, FcPieChart, FcPlus } from "react-icons/fc";
 import { Carousel, Report } from "@components";
 import { generateUUID } from "@utils";
 import {

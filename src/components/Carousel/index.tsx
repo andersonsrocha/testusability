@@ -1,5 +1,5 @@
 import { Carousel as AntCarousel, CarouselProps } from "antd";
-import { LeftOutlined, RightOutlined, SaveOutlined } from "@ant-design/icons";
+import { LeftOutlined, RightOutlined } from "@ant-design/icons";
 import { CustomArrowProps } from "@ant-design/react-slick/types";
 import styled from "@emotion/styled";
 
