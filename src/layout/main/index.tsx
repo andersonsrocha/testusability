@@ -307,6 +307,7 @@ export function Main() {
                                 <Fragment>
                                   {fields.map(({ key, name, ...restField }) => (
                                     <Form.Item
+                                      key={key}
                                       {...restField}
                                       label={t("note")}
                                       name={[name, "note"]}
