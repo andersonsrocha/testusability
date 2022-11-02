@@ -18,6 +18,7 @@
 - [🔍 Preview](#-preview)
 - [🎨 Theming](#-theming)
 - [🌍 Internationalization](#-internationalization)
+- [⭐ Credits](#-credits)
 - [🔗 Links](#-links)
 
 ## 📄 About
@@ -82,6 +83,10 @@ Dozens of languages supported in `antd`, see [i18n](https://ant.design/docs/reac
 - 🇧🇷 **pt-BR**
 - 🇵🇹 **pt**
 - 🇺🇸 **en**
+
+## ⭐ Credits
+
+- [Loading](https://dribbble.com/shots/7425055-Book-Loader)
 
 ## 🔗 Links
 
