@@ -4,13 +4,12 @@ import {
   ArrowRightOutlined,
   DeleteOutlined,
   EditOutlined,
-  MoreOutlined,
   PlusOutlined,
   QuestionCircleOutlined,
   SaveOutlined,
 } from "@ant-design/icons";
-import { FcElectronics, FcLinux, FcPieChart, FcPlus } from "react-icons/fc";
-import { Carousel, Report } from "@components";
+import { FcElectronics, FcLinux, FcPieChart, FcStatistics } from "react-icons/fc";
+import { Ranking, Report } from "@components";
 import { generateUUID } from "@utils";
 import {
   Avatar,
@@ -19,13 +18,11 @@ import {
   Col,
   Divider,
   Drawer,
-  Dropdown,
   Form,
   Image,
   Input,
   Layout,
   List,
-  Menu,
   Radio,
   Row,
   Space,
@@ -40,7 +37,6 @@ import useAntMediaQuery from "use-media-antd-query";
 import { Website } from "@types";
 
 import Exemplo1 from "@assets/laws/law_1.gif";
-import Exemplo10 from "@assets/laws/law_10.png";
 import Exemplo2 from "@assets/laws/law_2.gif";
 import Exemplo3 from "@assets/laws/law_3.png";
 import Exemplo4 from "@assets/laws/law_4.png";
@@ -49,6 +45,7 @@ import Exemplo6 from "@assets/laws/law_6.png";
 import Exemplo7 from "@assets/laws/law_7.png";
 import Exemplo8 from "@assets/laws/law_8.png";
 import Exemplo9 from "@assets/laws/law_9.png";
+import Exemplo10 from "@assets/laws/law_10.png";
 
 const { Content } = Layout;
 
@@ -58,6 +55,7 @@ export function Main() {
   const sm = ["xs", "sm"].includes(colSize);
 
   const [form] = Form.useForm<Website>();
+  const [tab, setTab] = useState("graphic");
   const [step, setStep] = useState(0);
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [sites, setSites] = useState<Array<Website>>([]);
@@ -106,6 +104,31 @@ export function Main() {
     ],
     []
   );
+
+  const tabs = [
+    {
+      key: "graphic",
+      tab: (
+        <Row align="middle" gutter={4}>
+          <Col style={{ display: "flex", alignItems: "center" }}>
+            <FcPieChart size={24} />
+          </Col>
+          <Col>{t("graphic")}</Col>
+        </Row>
+      ),
+    },
+    {
+      key: "ranking",
+      tab: (
+        <Row align="middle" gutter={4}>
+          <Col style={{ display: "flex", alignItems: "center" }}>
+            <FcStatistics size={24} />
+          </Col>
+          <Col>{t("ranking")}</Col>
+        </Row>
+      ),
+    },
+  ];
 
   const data = sites
     .map((site) =>
@@ -195,17 +218,13 @@ export function Main() {
                 <Card
                   hoverable
                   type="inner"
-                  title={
-                    <Row align="middle" gutter={4}>
-                      <Col style={{ display: "flex", alignItems: "center" }}>
-                        <FcPieChart size={24} />
-                      </Col>
-                      <Col>{t("result")}</Col>
-                    </Row>
-                  }
+                  tabList={tabs}
+                  activeTabKey={tab}
+                  onTabChange={setTab}
                   size={sm ? "small" : "default"}
                 >
-                  <Report data={data} />
+                  {tab === "graphic" && <Report data={data} />}
+                  {tab === "ranking" && <Ranking data={sites} />}
                 </Card>
               )}
             </Col>
