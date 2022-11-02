@@ -20,6 +20,7 @@
 - [🌍 Internationalization](#-internationalization)
 - [⭐ Credits](#-credits)
 - [🔗 Links](#-links)
+- [📝 License](#-license)
 
 ## 📄 About
 
@@ -98,3 +99,7 @@ Dozens of languages supported in `antd`, see [i18n](https://ant.design/docs/reac
 - [Ant Design Pro Components](https://procomponents.ant.design/)
 - [Github](https://github.com/andersonsrocha)
 - [LinkedIn](https://www.linkedin.com/in/anderson-silva-a40926192)
+
+## 📝 License
+
+This project is under the MIT license. See the [LICENSE](LICENSE) file for more details.
